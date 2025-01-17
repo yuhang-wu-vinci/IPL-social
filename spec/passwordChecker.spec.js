@@ -79,6 +79,7 @@ describe('hasDigit', () => {
 });
 
 
+// test mot de passe est valide
 describe('isValidPassword', () => {
   it('devrait retourner true pour un mot de passe valide', () => {
     expect(isValidPassword('Valid123!')).toBe(true);
