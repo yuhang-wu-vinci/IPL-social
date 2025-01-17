@@ -1,6 +1,7 @@
 const { hasMinLength } = require('../passwordChecker');
 const { hasSpecialCharacter } = require('../passwordChecker');
 const { hasDigit } = require('../passwordChecker');
+const { isValidPassword } = require('../passwordChecker');
 
 
 //test de la taille du mdp
@@ -74,5 +75,40 @@ describe('hasDigit', () => {
 
   it('devrait retourner true si le mot de passe se termine par un chiffre', () => {
     expect(hasDigit('Valid!1')).toBe(true);
+  });
+});
+
+
+describe('isValidPassword', () => {
+  it('devrait retourner true pour un mot de passe valide', () => {
+    expect(isValidPassword('Valid123!')).toBe(true);
+  });
+
+  it('devrait retourner false si le mot de passe est trop court', () => {
+    expect(isValidPassword('Short1!')).toBe(false);
+  });
+
+  it('devrait retourner false si le mot de passe n\'a pas de caractère spécial', () => {
+    expect(isValidPassword('Valid123')).toBe(false);
+  });
+
+  it('devrait retourner false si le mot de passe n\'a pas de chiffre', () => {
+    expect(isValidPassword('Valid!@')).toBe(false);
+  });
+
+  it('devrait retourner false si le mot de passe contient "IPL"', () => {
+    expect(isValidPassword('IPLP@ssword123')).toBe(false);
+  });
+
+  it('devrait retourner true pour un mot de passe avec des caractères spéciaux, des chiffres et une longueur suffisante', () => {
+    expect(isValidPassword('Passw0rd!')).toBe(true);
+  });
+
+  it('devrait retourner false pour un mot de passe vide', () => {
+    expect(isValidPassword('')).toBe(false);
+  });
+
+  it('devrait retourner true pour un mot de passe avec des caractères spéciaux et des chiffres au début et à la fin', () => {
+    expect(isValidPassword('!Passw0rd!')).toBe(true);
   });
 });
