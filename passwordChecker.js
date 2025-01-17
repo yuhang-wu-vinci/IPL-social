@@ -8,7 +8,13 @@ const hasSpecialCharacter = (password) => {
     return SPECIAL_CHAR_PATTERN.test(password);
 };
 
+const hasDigit = (password) => {
+    const DIGIT_PATTERN = /\d/;
+    return DIGIT_PATTERN.test(password);
+};
+
 module.exports = {
     hasMinLength,
-    hasSpecialCharacter
+    hasSpecialCharacter,
+    hasDigit
 };
